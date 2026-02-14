@@ -7,141 +7,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
-  /* =========================
-   RESPONSIVE MOBILE
-========================= */
-@media (max-width:600px){
-.images{
-flex-direction:column;
-align-items:center;
-gap:15px;
-bottom:10px;
-}
-}
-
-@media (max-width:1024px){
-
-.title{
-font-size:55px;
-}
-
-.countdown{
-font-size:28px;
-padding:12px 30px;
-}
-
-.message{
-font-size:20px;
-padding:0 20px;
-}
-
-.images img{
-width:200px;
-}
-
-.images{
-padding:0 40px;
-}
-
-.logo{
-width:100px;
-}
-
-}
-
 /* =========================
-   TABLET
+   GLOBAL FIX FOR iPHONE
 ========================= */
-
-@media (max-width:768px){
-
-.title{
-font-size:40px;
+html, body{
+width:100%;
+overflow-x:hidden;
+-webkit-text-size-adjust:100%;
 }
 
-.countdown{
-font-size:22px;
-padding:10px 20px;
-}
-
-.company-name{
-font-size:22px;
-}
-
-.message{
-font-size:18px;
-max-width:90%;
-}
-
-.images{
-flex-direction:column;
-align-items:center;
-gap:20px;
-bottom:20px;
-}
-
-.images img{
-width:160px;
-}
-
-.menu-content{
-width:95%;
-padding:25px;
-}
-
-.menu-content button{
-font-size:16px;
-padding:10px;
-}
-
-}
-
-/* =========================
-   MOBILE NHỎ
-========================= */
-
-@media (max-width:480px){
-
-.title{
-font-size:28px;
-}
-
-.countdown{
-font-size:18px;
-padding:8px 15px;
-}
-
-.company-name{
-font-size:18px;
-}
-
-.message{
-font-size:16px;
-}
-
-.logo{
-width:70px;
-top:10px;
-left:15px;
-}
-
-.menu-btn{
-padding:8px 15px;
-font-size:14px;
-}
-
-.toast{
-bottom:15px;
-right:15px;
-font-size:13px;
-padding:8px 15px;
-}
-
-.falling-wish{
-font-size:16px;
-padding:6px 12px;
-}
-
+/* Ảnh luôn hiển thị đúng */
+img{
+max-width:100%;
+height:auto;
+display:block;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -149,8 +28,11 @@ body{
 font-family:'Be Vietnam Pro',sans-serif;
 background: radial-gradient(circle at center,#ff2a2a,#8b0000);
 color:white;
-overflow:hidden;
 text-align:center;
+overflow-x:hidden;
+ min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 .company-name{
 font-size:32px;
@@ -171,32 +53,44 @@ color:white;
 text-shadow:0 0 10px gold;
 }
 
-/* CHỮ RƠI */
+/* ===== CHỮ CHÚC RƠI PRO ===== */
+
 .falling-wish{
-position:fixed;
-top:-100px;
-font-size:22px;
-font-weight:bold;
-color:gold;
-background:linear-gradient(45deg,red,gold);
-padding:10px 20px;
-border-radius:15px;
-box-shadow:0 0 20px gold;
-white-space:nowrap;
-animation:fallWish 5s linear forwards;
-z-index:999;
+  position:fixed;
+  top:-80px;
+  left:0;
+ font-size: clamp(12px, 2.8vw, 18px);
+
+  font-weight:600;
+  color:gold;
+  background:linear-gradient(45deg,red,gold);
+  padding:6px 14px;
+  border-radius:20px;
+  box-shadow:0 0 15px rgba(255,215,0,0.6);
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+  z-index:3;
+  opacity:0.95;
+  will-change:transform;
+  animation:fallWishSmooth 6s linear forwards; /* <-- thêm 6s */
 }
 
-@keyframes fallWish{
-0%{
-transform:translateY(0) rotate(0deg);
-opacity:1;
+
+@keyframes fallWishSmooth{
+  0%{
+    transform:translate3d(0,0,0) rotate(-3deg);
+    opacity:1;
+  }
+  100%{
+    transform:translate3d(0,120vh,0) rotate(6deg);
+    opacity:0;
+  }
 }
-100%{
-transform:translateY(110vh) rotate(5deg);
-opacity:0;
-}
-}
+
+
+
+
 
 
 @keyframes fall{
@@ -354,16 +248,22 @@ z-index:1;
 
 /* WRAPPER */
 .wrapper{
-position:relative;
-z-index:2;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:60px;
+  position:relative;
+  z-index:2;
 }
 
-.logo{width:140px;margin-bottom:20px}
+.content{
+  text-align:center;
+  max-width:1000px;
+  padding:0 20px;
+}
+
 
 .title{
 font-size:75px;
@@ -390,37 +290,48 @@ line-height:1.6;
 }
 
 .images{
-position:absolute;
-bottom:20px;
-left:0;
-width:100%;
-display:flex;
-justify-content:space-between;
-align-items:flex-end;
-padding:0 5vw;
-z-index:2;
-pointer-events:none;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  padding:0 5vw 30px;
 }
 
 .images img{
-width:clamp(120px,18vw,260px);
-max-width:45%;
-height:auto;
-filter:drop-shadow(0 0 20px gold);
+  width:clamp(140px,18vw,260px);
+  height:auto;
+  max-width:45%;
+  filter:drop-shadow(0 0 25px gold);
+  transition:0.3s ease;
+}
+
+.images img:hover{
+  transform:scale(1.05);
 }
 
 
 /* LÌ XÌ RƠI */
+/* LÌ XÌ RƠI PRO VERSION */
 .lixi{
-position:fixed;
-top:-50px;
-font-size:28px;
-animation:fall linear forwards;
-z-index:3;
+  position:fixed;
+  top:-60px;
+  font-size:clamp(18px, 4vw, 28px);
+  pointer-events:none;
+  user-select:none;
+  z-index:3;
+  will-change:transform;
+  animation:fallSmooth linear forwards;
 }
 
-@keyframes fall{
-to{transform:translateY(110vh)}
+@keyframes fallSmooth{
+  0%{
+    transform:translate3d(0,0,0) rotate(0deg);
+    opacity:1;
+  }
+  100%{
+    transform:translate3d(0,120vh,0) rotate(360deg);
+    opacity:0.9;
+  }
 }
 
 .start-screen{
@@ -435,6 +346,152 @@ z-index:5;
 font-size:30px;
 cursor:pointer;
 }
+/* =========================
+   RESPONSIVE FIX - MOBILE FIRST
+========================= */
+
+/* ===== TABLET ===== */
+@media (max-width: 1024px){
+
+.title{
+  font-size:55px;
+}
+
+.countdown{
+  font-size:28px;
+  padding:12px 30px;
+}
+
+.message{
+  font-size:20px;
+  padding:0 20px;
+}
+
+.images{
+  padding:0 40px;
+}
+
+.images img{
+  width:200px;
+}
+
+.logo{
+  width:100px;
+}
+
+}
+
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px){
+   .content{
+    margin-top:100px;
+  }
+  .falling-wish{
+    font-size:8px;
+    padding:4px 10px;
+    border-radius:15px;
+  }
+.title{
+  font-size:40px;
+}
+
+.countdown{
+  font-size:22px;
+  padding:10px 20px;
+}
+
+.company-name{
+  font-size:22px;
+}
+
+
+.countdown{
+  font-size: clamp(28px, 6vw, 60px);
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.countdown span{
+  display: inline-block;
+  min-width: 70px;
+  text-align: center;
+}
+
+.images{
+  display: flex;
+  flex-direction: row;   /* ✅ nằm ngang */
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  padding: 30px 0;
+  flex-wrap: wrap;       /* ✅ không bị vỡ layout khi màn nhỏ */
+}
+
+.images img{
+  width: 200px;          /* ❌ bỏ 15% đi */
+  max-width: 100%;
+  height: auto;
+}
+
+.menu-content button{
+  font-size:16px;
+  padding:10px;
+}
+  .lixi{
+    font-size:clamp(16px,5vw,22px);
+  }
+}
+
+
+/* ===== MOBILE NHỎ (IPHONE SE etc) ===== */
+@media (max-width: 480px){
+
+.title{
+  font-size:28px;
+}
+
+.countdown{
+  font-size:18px;
+  padding:8px 15px;
+}
+
+.company-name{
+  font-size:18px;
+}
+
+.message{
+  font-size:16px;
+}
+
+.logo{
+  width:70px;
+  top:10px;
+  left:15px;
+}
+
+.menu-btn{
+  padding:8px 15px;
+  font-size:14px;
+}
+
+.toast{
+  bottom:15px;
+  right:15px;
+  font-size:13px;
+  padding:8px 15px;
+}
+
+.falling-wish{
+  font-size:16px;
+  padding:6px 12px;
+}
+
+}
+
 </style>
 </head>
 <body>
@@ -446,32 +503,37 @@ cursor:pointer;
 <canvas id="fireworks"></canvas>
 
 <div class="wrapper">
-<img src="img/logo-w.svg" class="logo">
-<div class="wrapper">
 
-<div class="company-name">
-Channel Well Technology
+  <img src="img/logo-w.svg" class="logo">
+
+  <div class="content">
+
+    <div class="company-name">
+      Channel Well Technology
+    </div>
+
+    <div class="title">
+      🎉 CHÚC MỪNG NĂM MỚI 2026 🎉
+    </div>
+
+    <div class="countdown" id="countdown"></div>
+
+    <div class="message">
+      Kính chúc toàn thể anh em công ty năm mới<br>
+      <b>AN KHANG – THỊNH VƯỢNG – BỨT PHÁ ĐỈNH CAO</b><br><br>
+      Chúc đại gia đình đoàn kết – nhiệt huyết – thành công rực rỡ!<br>
+      Tài lộc dồi dào – dự án bùng nổ – thu nhập tăng cao 🚀🧧
+    </div>
+
+  </div>
+
+  <div class="images">
+    <img src="img/hoamai.png" alt="Hoa mai">
+    <img src="img/banhtet.png" alt="Bánh tét">
+  </div>
+
 </div>
 
-<div class="title">🎉 CHÚC MỪNG NĂM MỚI 2026 🎉</div>
-
-<div class="countdown" id="countdown"></div>
-
-<div class="message">
-Kính chúc toàn thể anh em công ty năm mới<br>
-<b>AN KHANG – THỊNH VƯỢNG – BỨT PHÁ ĐỈNH CAO</b><br><br>
-Chúc đại gia đình đoàn kết – nhiệt huyết – thành công rực rỡ!<br>
-Tài lộc dồi dào – dự án bùng nổ – thu nhập tăng cao 🚀🧧
-</div>
-
-</div>
-
-</div>
-
-<div class="images">
-<img src="img/hoamai.png">
-<img src="img/banhtet.png">
-</div>
 <!-- MENU BUTTON -->
 <button class="menu-btn" onclick="openMenu()">☰ MENU</button>
 
@@ -588,18 +650,36 @@ setInterval(createFirework,1200);
 }
 
 
-/* LÌ XÌ RƠI */
 function startLiXi(){
-setInterval(function(){
-var el=document.createElement("div");
-el.className="lixi";
-el.innerHTML="🧧";
-el.style.left=Math.random()*window.innerWidth+"px";
-el.style.animationDuration=(Math.random()*3+3)+"s";
-document.body.appendChild(el);
-setTimeout(()=>el.remove(),6000);
-},300);
+
+  const isMobile = window.innerWidth <= 768;
+
+  setInterval(function(){
+
+    var el = document.createElement("div");
+    el.className = "lixi";
+    el.innerHTML = "🧧";
+
+    /* Giới hạn vùng rơi để không che giữa màn hình */
+    const side = Math.random() < 0.5;
+    if(isMobile){
+      el.style.left = side 
+        ? Math.random() * 20 + "vw"
+        : 80 + Math.random() * 20 + "vw";
+    } else {
+      el.style.left = Math.random() * 100 + "vw";
+    }
+
+    /* Thời gian rơi chậm hơn để mượt */
+    el.style.animationDuration = (5 + Math.random() * 4) + "s";
+
+    document.body.appendChild(el);
+
+    setTimeout(() => el.remove(), 9000);
+
+  }, isMobile ? 1200 : 600); // Mobile rơi thưa hơn
 }
+
 
 </script>
 <script>
